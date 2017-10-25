@@ -1,0 +1,59 @@
+import scala.io.StdIn.{readLine,readInt}
+import scala.util.control._
+
+class Binary
+{
+	var i,j=Int;
+	//var j=Int;
+	var arr:Array[Int] = new Array[Int](50);
+
+	def bubbleSort():Unit={
+		println("Enter no. of elements in array");
+		val n=readInt()
+		println("Enter "+n+" elements of array");
+		for(i<-0 to n-1)
+		    arr(i)=readInt;
+		for(i<- 1 to n-1){
+      			for(j <- 0 to (n-i-1) ){
+        			if(arr(j)>arr(j+1)){
+          				val temp=arr(j+1)
+          				arr(j+1)=arr(j)
+          				arr(j)=temp
+				}
+			}
+		}
+		println("Sorted array is: ");
+		for(i<-0 to n-1)
+			println(arr(i));
+
+		println("Enter your no. to be searched");
+		val search:Int = readInt();
+
+		val result:Int= binarySearch(0,n-1,search);
+		if (result == -1)
+			println("Element not found");      //not found
+		else
+			println("Element "+arr(result)+" found at: "+result);    //element found 
+	}
+
+	def binarySearch(low:Int,high:Int,search:Int):Int={
+		val mid=(low+high)/2;
+		if(low>high)    
+			return -1;
+		else{
+			if(arr(mid)==search)
+				return mid;
+			else if(arr(mid)<search) //recursive case.
+				return binarySearch(mid+1,high,search);
+			else
+				return binarySearch(low,mid-1,search);		}
+		}
+	}
+
+object Bin1{
+	def main(args:Array[String]):Unit=
+	{
+		val b=new Binary();
+	b.bubbleSort();
+	}
+}
